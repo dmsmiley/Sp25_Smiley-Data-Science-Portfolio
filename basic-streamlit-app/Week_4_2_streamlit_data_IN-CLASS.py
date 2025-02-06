@@ -43,7 +43,7 @@ st.dataframe(df[df["City"] == city])
 # This teaches students how to work with external data in Streamlit
 # # Ensure the "data" folder exists with the CSV file
 # Display the imported dataset
-df2 = pd.read_csv("C:/Users/dsmiley/Documents/GitHub/Smiley-Data-Science-Portfolio/basic-streamlit-app/data/sample_data.csv")
+df2 = pd.read_csv("data\sample_data.csv")
 st.dataframe(df2)
 # Using a selectbox to allow users to filter data by city
 # Students learn how to use widgets in Streamlit for interactivity
