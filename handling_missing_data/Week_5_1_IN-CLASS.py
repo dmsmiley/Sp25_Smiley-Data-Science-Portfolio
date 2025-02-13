@@ -30,6 +30,7 @@ df = pd.read_csv("titanic.csv")
 # ------------------------------------------------------------------------------
 # Show key statistical measures like mean, standard deviation, etc.
 st.write("**Summary Statistics**")
+st.write(df.shape)
 st.dataframe(df.describe())
 
 # ------------------------------------------------------------------------------
@@ -37,12 +38,16 @@ st.dataframe(df.describe())
 # ------------------------------------------------------------------------------
 # Display the count of missing values for each column.
 st.write("**Number of Missing Values by Column**")
+st.dataframe(df.isnull().sum())
 
 # ------------------------------------------------------------------------------
 # Visualize Missing Data
 # ------------------------------------------------------------------------------
 # Create a heatmap to visually indicate where missing values occur.
-
+st.write("Heatmap of Missing Values")
+fig, ax = plt.subplots()
+sns.heatmap(df.isnull(), cmap = "viridis", cbar = False)
+st.pyplot(fig)
 
 # ================================================================================
 # Interactive Missing Data Handling
@@ -54,12 +59,16 @@ st.write("**Number of Missing Values by Column**")
 # - Dropping columns if more than 50% of the values are missing
 # - Imputing missing values with mean, median, or zero
 # ================================================================================
-
+st.subheader("Handle Missing Data")
 
 # Work on a copy of the DataFrame so the original data remains unchanged.
-
+column = st.selectbox("Choose a column to fill:", df.select_dtypes(include=["number"]).columns)
 # Apply the selected method to handle missing data.
+st.dataframe(df[column])
 
+st.radio("Choose a method:", 
+         ["Original DF", "Drop Rows", "Drop Columns", 
+          "Impute Mean", "Impute Median", "Impute Zero"])
 
 # ------------------------------------------------------------------------------
 # Compare Data Distributions: Original vs. Cleaned
